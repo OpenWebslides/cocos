@@ -21,6 +21,14 @@ server {
         try_files $uri $uri/ /index.php?$args;
     }
 
+    location ~ ^/pressbook {
+        root /data/;
+
+        try_files $uri $uri/ /index.php?$args;
+
+        include include.d/php-fpm.conf;
+    }
+
     include include.d/php-fpm.conf;
     include include.d/assets.conf;
 }
