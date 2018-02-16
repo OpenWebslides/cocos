@@ -7,4 +7,6 @@ server {
     listen [::]:80;
 
     root /data/cocos/;
+
+    include include.d/php-fpm.conf;
 }
