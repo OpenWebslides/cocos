@@ -2,11 +2,25 @@
 # CoCOS project site
 #
 server {
-    server_name cocos.digital www.cocos.digital cocos.education www.cocos.education;
+    server_name cocos.education;
+
+    listen 80;
+    listen [::]:80;
+
+    return 301 http://www.cocos.education/;
+}
+
+server {
+    server_name www.cocos.education;
     listen 80;
     listen [::]:80;
 
     root /data/cocos/;
 
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+
     include include.d/php-fpm.conf;
+    include include.d/assets.conf;
 }
