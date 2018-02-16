@@ -4,7 +4,7 @@ services:
   ##
   # Database container
   #
-  postgres:
+  mariadb:
     image: mariadb:10.3.4
     env_file: cocos.env
     volumes:
