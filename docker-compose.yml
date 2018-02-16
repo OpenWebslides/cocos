@@ -19,6 +19,7 @@ services:
     volumes:
       - ${PWD}/nginx/:/etc/nginx/
       - cocos:/data/cocos/
+      - pressbook:/data/pressbook/
     ports:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
@@ -32,11 +33,15 @@ services:
   php:
     build: php
     volumes:
-        - cocos:/data/cocos/
+      - cocos:/data/cocos/
+      - pressbook:/data/pressbook/
 
 volumes:
   # CoCOS data volume
   cocos:
+
+  # Pressbook data volume
+  pressbook:
 
   # CoCOON data volume
   cocoon:
