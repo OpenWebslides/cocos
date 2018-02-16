@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  ##
+  # Database container
+  #
+  postgres:
+    image: mariadb:10.3.4
+    env_file: cocos.env
+    volumes:
+      - mariadb:/var/lib/mysql/
+    restart: always
+
+  ##
+  # Web server container
+  #
+  nginx:
+    image: nginx:1.13
+    volumes:
+      - ${PWD}/nginx/:/etc/nginx/
+    ports:
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
+    depends_on:
+      - app
+    links:
+      - app
+    restart: always
+
+volumes:
+  # CoCOS data volume
+  cocos:
+
+  # CoCOON data volume
+  cocoon:
+
+  # Moodle data volume
+  moodle:
+
+  # Database volume
+  mariadb:
+
+networks:
+  default:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.8.1/24
