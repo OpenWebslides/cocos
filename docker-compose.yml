@@ -18,6 +18,7 @@ services:
     image: nginx:1.13
     volumes:
       - ${PWD}/nginx/:/etc/nginx/
+      - cocos:/data/cocos/
     ports:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"

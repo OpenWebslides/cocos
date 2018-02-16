@@ -1,0 +1,10 @@
+##
+# CoCOS project site
+#
+server {
+    server_name cocos.digital www.cocos.digital cocos.education www.cocos.education;
+    listen 80;
+    listen [::]:80;
+
+    root /data/cocos/;
+}
