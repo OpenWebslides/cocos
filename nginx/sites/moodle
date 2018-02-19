@@ -1,0 +1,26 @@
+##
+# Moodle
+#
+server {
+    server_name cocos.digital;
+
+    listen 80;
+    listen [::]:80;
+
+    return 301 http://www.cocos.digital/;
+}
+
+server {
+    server_name www.cocos.digital;
+    listen 80;
+    listen [::]:80;
+
+    root /data/moodle/;
+
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+
+    include include.d/php-fpm.conf;
+    include include.d/assets.conf;
+}
