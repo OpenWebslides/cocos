@@ -20,6 +20,7 @@ services:
       - ${PWD}/nginx/:/etc/nginx/
       - cocos:/data/cocos/
       - pressbook:/data/pressbook/
+      - moodle:/data/moodle/
     ports:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
@@ -35,6 +36,7 @@ services:
     volumes:
       - cocos:/data/cocos/
       - pressbook:/data/pressbook/
+      - moodle:/data/moodle/
 
 volumes:
   # CoCOS data volume
