@@ -21,6 +21,7 @@ services:
       - cocos:/data/cocos/
       - pressbook:/data/pressbook/
       - moodle:/data/moodle/
+      - moodle-data:/data/moodle-data/
     ports:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
@@ -37,6 +38,7 @@ services:
       - cocos:/data/cocos/
       - pressbook:/data/pressbook/
       - moodle:/data/moodle/
+      - moodle-data:/data/moodle-data/
 
 volumes:
   # CoCOS data volume
@@ -48,8 +50,9 @@ volumes:
   # CoCOON data volume
   cocoon:
 
-  # Moodle data volume
+  # Moodle data volumes
   moodle:
+  moodle-data:
 
   # Database volume
   mariadb:
