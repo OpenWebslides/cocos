@@ -21,7 +21,7 @@ server {
         try_files $uri $uri/ /index.php?$args;
     }
 
-    location ~ ^/pressbook {
+    location ^~ /pressbook {
         root /data/;
 
         try_files $uri $uri/ /index.php?$args;
