@@ -18,7 +18,7 @@ services:
     image: nginx:1.13
     volumes:
       - ${PWD}/nginx/:/etc/nginx/
-      - certs:/etc/letsencrypt/
+      - certs:/etc/letsencrypt/:ro
       - certs-data:/data/letsencrypt/
       - cocos:/data/cocos/
       - pressbook:/data/pressbook/
