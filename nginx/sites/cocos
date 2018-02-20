@@ -20,8 +20,8 @@ server {
     listen 443      ssl;
     listen [::]:443 ssl;
 
-    ssl_certificate     /etc/nginx/certs/live/cocos.education/fullchain.pem;
-    ssl_certificate_key /etc/nginx/certs/live/cocos.education/privkey.pem;
+    ssl_certificate     /etc/letsencrypt/live/cocos.education/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/cocos.education/privkey.pem;
 
     include include.d/ocsp-stapling.conf;
 
@@ -36,8 +36,8 @@ server {
     listen 443      ssl;
     listen [::]:443 ssl;
 
-    ssl_certificate     /etc/nginx/certs/live/www.cocos.education/fullchain.pem;
-    ssl_certificate_key /etc/nginx/certs/live/www.cocos.education/privkey.pem;
+    ssl_certificate     /etc/letsencrypt/live/cocos.education/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/cocos.education/privkey.pem;
 
     include include.d/ocsp-stapling.conf;
 
