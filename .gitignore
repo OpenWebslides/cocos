@@ -1,2 +1,4 @@
 cocos.env
 .idea
+
+nginx/dhparams.pem
