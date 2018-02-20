@@ -10,5 +10,11 @@ docker-compose -f docker-compose.yml -f docker-compose.certbot.yml run --rm cert
   -d cocos.education \
   -d www.cocos.education
 
+docker-compose -f docker-compose.yml -f docker-compose.certbot.yml run --rm certbot \
+  --certonly --agree-tos --email florian@floriandejonckheere.be \
+  --renew-by-default -n --text --webroot -w /data/letsencrypt/ \
+  -d cocos.digital \
+  -d www.cocos.digital
+
 # Reload NGINX configuration
 docker kill -s HUP `docker-compose ps -q nginx`
