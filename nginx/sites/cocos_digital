@@ -1,0 +1,31 @@
+##
+# cocos.digital redirect
+#
+server {
+    server_name cocos.digital www.cocos.digital;
+
+    listen 80;
+    listen [::]:80;
+
+    include include.d/lets-encrypt.conf;
+
+    location / {
+        return 301 https://www.cocos.education$request_uri;
+    }
+}
+
+server {
+    server_name cocos.digital www.cocos.digital;
+
+    listen 443      ssl;
+    listen [::]:443 ssl;
+
+    ssl_certificate     /etc/letsencrypt/live/cocos.digital/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/cocos.digital/privkey.pem;
+
+    include include.d/ocsp-stapling.conf;
+
+    location / {
+        return 301 https://www.cocos.education$request_uri;
+    }
+}
