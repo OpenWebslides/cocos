@@ -1,0 +1,36 @@
+##
+# CoCOS pressbook
+#
+server {
+    server_name publications.cocos.education;
+
+    listen 80;
+    listen [::]:80;
+
+    include include.d/lets-encrypt.conf;
+
+    location / {
+        return 301 https://publications.cocos.education$request_uri;
+    }
+}
+
+server {
+    server_name publications.cocos.education;
+
+    listen 443      ssl;
+    listen [::]:443 ssl;
+
+    ssl_certificate     /etc/letsencrypt/live/publications.cocos.education/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/publications.cocos.education/privkey.pem;
+
+    include include.d/ocsp-stapling.conf;
+
+    root /data/pressbook/;
+
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+
+    include include.d/php-fpm.conf;
+    include include.d/assets.conf;
+}
