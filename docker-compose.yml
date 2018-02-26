@@ -41,6 +41,14 @@ services:
       - pressbook:/data/pressbook/
       - moodle:/data/moodle/
       - moodle-data:/data/moodle-data/
+  ##
+  # Cron container
+  #
+  cron:
+    build: cron
+    volumes:
+      - moodle:/data/moodle/
+      - moodle-data:/data/moodle-data/
 
 volumes:
   # CoCOS data volume
