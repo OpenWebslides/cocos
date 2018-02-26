@@ -8,7 +8,9 @@ docker-compose -f docker-compose.yml -f docker-compose.certbot.yml run --rm cert
   certonly --agree-tos --email florian@floriandejonckheere.be \
   --renew-by-default -n --text --webroot -w /data/letsencrypt/ \
   -d cocos.education \
-  -d www.cocos.education
+  -d www.cocos.education \
+  -d my.cocos.education \
+  -d publications.cocos.education
 
 docker-compose -f docker-compose.yml -f docker-compose.certbot.yml run --rm certbot \
   certonly --agree-tos --email florian@floriandejonckheere.be \
