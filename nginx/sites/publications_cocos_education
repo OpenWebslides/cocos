@@ -1,6 +1,18 @@
 ##
 # CoCOS pressbook
 #
+
+map $uri $blogname{
+    ~^(?P<blogpath>/[^/]+/)files/(.*)       $blogpath ;
+}
+
+map $blogname $blogid{
+    default -999;
+
+    #Ref: http://wordpress.org/extend/plugins/nginx-helper/
+    include /data/pressbook/wp-content/uploads/nginx-helper/map.conf;
+}
+
 server {
     server_name publications.cocos.education;
 
@@ -26,6 +38,24 @@ server {
     include include.d/ocsp-stapling.conf;
 
     root /data/pressbook/;
+
+    location ~ ^(/[^/]+/)?files/(.+) {
+        try_files /wp-content/blogs.dir/$blogid/files/$2 /wp-includes/ms-files.php?file=$2 ;
+        access_log off;     log_not_found off; expires max;
+    }
+
+    # Avoid php readfile()
+    location ^~ /blogs.dir {
+        internal;
+        alias /data/pressbook/wp-content/blogs.dir ;
+        access_log off;     log_not_found off; expires max;
+    }
+
+    if (!-e $request_filename) {
+        rewrite /wp-admin$ $scheme://$host$uri/ permanent;
+        rewrite ^(/[^/]+)?(/wp-.*) $2 last;
+        rewrite ^(/[^/]+)?(/.*\.php) $2 last;
+    }
 
     location / {
         try_files $uri $uri/ /index.php?$args;
