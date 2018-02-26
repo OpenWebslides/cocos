@@ -36,6 +36,8 @@ services:
   #
   php:
     build: php
+    links:
+      - mariadb
     volumes:
       - cocos:/data/cocos/
       - pressbook:/data/pressbook/
@@ -46,6 +48,8 @@ services:
   #
   cron:
     build: cron
+    links:
+      - mariadb
     volumes:
       - moodle:/data/moodle/
       - moodle-data:/data/moodle-data/
