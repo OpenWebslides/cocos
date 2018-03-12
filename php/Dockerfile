@@ -15,6 +15,8 @@ RUN docker-php-ext-install -j$(nproc) iconv mcrypt \
 
 RUN docker-php-ext-configure opcache --enable-opcache \
     && docker-php-ext-install opcache
-    
+
+RUN usermod -u 1000 www-data
+
 COPY opcache.ini $PHP_INI_DIR/conf.d/
 COPY max_filesize.ini $PHP_INI_DIR/conf.d/
