@@ -17,3 +17,4 @@ RUN docker-php-ext-configure opcache --enable-opcache \
     && docker-php-ext-install opcache
     
 COPY opcache.ini $PHP_INI_DIR/conf.d/
+COPY max_filesize.ini $PHP_INI_DIR/conf.d/
