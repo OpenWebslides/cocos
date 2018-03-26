@@ -8,10 +8,9 @@ RUN apt-get update && apt-get install -y \
         libicu-dev \
         libxml2-dev \
         g++ \
-        wget \
-        epubcheck \
+        wget unzip \
         libxml2-utils \
-        libsaxonhe-java libxslt1.1 libxslt1-dev
+        libxslt1.1 libxslt1-dev
 
 RUN docker-php-ext-install -j$(nproc) iconv mcrypt xsl \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
@@ -30,3 +29,13 @@ RUN wget http://kindlegen.s3.amazonaws.com/kindlegen_linux_2.6_i386_v2_9.tar.gz 
 RUN tar xzf /tmp/kindlegen.tar.gz -C /tmp
 RUN mv /tmp/kindlegen /usr/local/bin
 RUN rm -r /tmp/*
+
+# Install epubcheck
+RUN wget https://github.com/IDPF/epubcheck/releases/download/v4.0.0/epubcheck-4.0.0.zip -O /tmp/epubcheck.zip
+RUN unzip /tmp/epubcheck.zip -d /tmp
+RUN mkdir -p /usr/local/share/java/
+RUN mv /tmp/epubcheck-4.0.0/epubcheck.jar /usr/local/share/java/
+RUN rm -r /tmp/*
+
+# Install Saxon HE
+RUN wget http://central.maven.org/maven2/net/sf/saxon/Saxon-HE/9.7.0-10/Saxon-HE-9.7.0-10.jar -O /usr/local/share/java/Saxon-HE.jar
