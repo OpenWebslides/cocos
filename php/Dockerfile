@@ -33,3 +33,8 @@ RUN apt-get update && apt-get install -y epubcheck
 
 # Install xmllint
 RUN apt-get update && apt-get install -y libxml2-utils
+
+# Install Saxon HE
+RUN apt-get update && apt-get install -y libsaxonhe-java
+RUN apt-get update && apt-get install -y libxslt1.1 libxslt1-dev
+RUN docker-php-ext-install xsl
