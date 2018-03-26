@@ -20,3 +20,10 @@ RUN usermod -u 1000 www-data
 
 COPY opcache.ini $PHP_INI_DIR/conf.d/
 COPY max_filesize.ini $PHP_INI_DIR/conf.d/
+
+# Install KindleGen
+RUN apt-get update && apt-get install -y wget
+RUN wget http://kindlegen.s3.amazonaws.com/kindlegen_linux_2.6_i386_v2_9.tar.gz -O /tmp/kindlegen.tar.gz
+RUN tar xzf /tmp/kindlegen.tar.gz -C /tmp
+RUN mv /tmp/kindlegen /usr/local/bin
+RUN rm -r /tmp/*
