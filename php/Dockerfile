@@ -27,3 +27,6 @@ RUN wget http://kindlegen.s3.amazonaws.com/kindlegen_linux_2.6_i386_v2_9.tar.gz 
 RUN tar xzf /tmp/kindlegen.tar.gz -C /tmp
 RUN mv /tmp/kindlegen /usr/local/bin
 RUN rm -r /tmp/*
+
+# Install ePubCheck
+RUN apt-get update && apt-get install -y epubcheck
