@@ -31,10 +31,11 @@ RUN mv /tmp/kindlegen /usr/local/bin
 RUN rm -r /tmp/*
 
 # Install epubcheck
+RUN apt-get install -y openjdk-7-jre
 RUN wget https://github.com/IDPF/epubcheck/releases/download/v4.0.0/epubcheck-4.0.0.zip -O /tmp/epubcheck.zip
 RUN unzip /tmp/epubcheck.zip -d /tmp
 RUN mkdir -p /usr/local/share/java/
-RUN mv /tmp/epubcheck-4.0.0/epubcheck.jar /usr/local/share/java/
+RUN cp -r /tmp/epubcheck-4.0.0/* /usr/local/share/java/
 RUN rm -r /tmp/*
 
 # Install Saxon HE
