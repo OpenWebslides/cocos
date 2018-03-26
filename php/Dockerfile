@@ -30,3 +30,6 @@ RUN rm -r /tmp/*
 
 # Install ePubCheck
 RUN apt-get update && apt-get install -y epubcheck
+
+# Install xmllint
+RUN apt-get update && apt-get install -y libxml2-utils
