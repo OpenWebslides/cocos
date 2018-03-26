@@ -7,9 +7,13 @@ RUN apt-get update && apt-get install -y \
         libpng-dev \
         libicu-dev \
         libxml2-dev \
-        g++
+        g++ \
+        wget \
+        epubcheck \
+        libxml2-utils \
+        libsaxonhe-java libxslt1.1 libxslt1-dev
 
-RUN docker-php-ext-install -j$(nproc) iconv mcrypt \
+RUN docker-php-ext-install -j$(nproc) iconv mcrypt xsl \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd exif mysqli pdo_mysql zip intl xmlrpc soap
 
@@ -22,19 +26,7 @@ COPY opcache.ini $PHP_INI_DIR/conf.d/
 COPY max_filesize.ini $PHP_INI_DIR/conf.d/
 
 # Install KindleGen
-RUN apt-get update && apt-get install -y wget
 RUN wget http://kindlegen.s3.amazonaws.com/kindlegen_linux_2.6_i386_v2_9.tar.gz -O /tmp/kindlegen.tar.gz
 RUN tar xzf /tmp/kindlegen.tar.gz -C /tmp
 RUN mv /tmp/kindlegen /usr/local/bin
 RUN rm -r /tmp/*
-
-# Install ePubCheck
-RUN apt-get update && apt-get install -y epubcheck
-
-# Install xmllint
-RUN apt-get update && apt-get install -y libxml2-utils
-
-# Install Saxon HE
-RUN apt-get update && apt-get install -y libsaxonhe-java
-RUN apt-get update && apt-get install -y libxslt1.1 libxslt1-dev
-RUN docker-php-ext-install xsl
