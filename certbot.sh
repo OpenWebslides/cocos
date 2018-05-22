@@ -19,4 +19,4 @@ docker-compose -f docker-compose.yml -f docker-compose.certbot.yml run --rm cert
   -d www.cocos.digital
 
 # Reload NGINX configuration
-docker kill -s HUP `docker-compose ps -q nginx`
+docker-compose exec nginx nginx -s reload
