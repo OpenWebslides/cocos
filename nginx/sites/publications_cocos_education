@@ -21,6 +21,8 @@ server {
 
     include include.d/lets-encrypt.conf;
 
+    add_header X-Frame-Options "";
+
     location / {
         return 301 https://publications.cocos.education$request_uri;
     }
@@ -38,6 +40,8 @@ server {
     include include.d/ocsp-stapling.conf;
 
     root /data/pressbook/;
+
+    add_header X-Frame-Options "";
 
     location ~ ^(/[^/]+/)?files/(.+) {
         try_files /wp-content/blogs.dir/$blogid/files/$2 /wp-includes/ms-files.php?file=$2 ;
