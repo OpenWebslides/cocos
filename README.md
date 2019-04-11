@@ -63,3 +63,23 @@ $ docker kill -s HUP `docker-compose ps -q nginx`
 ```
 
 7. Set up a cron job to request new certificates every less than three months
+
+## Update
+
+1. Update the repository
+
+```bash
+$ git pull
+```
+
+2. Rebuild the images
+
+```bash
+$ docker-compose build
+```
+
+3. Restart the PHP container
+
+```bash
+$ docker-compose up -d --no-deps php
+```
