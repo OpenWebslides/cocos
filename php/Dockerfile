@@ -4,6 +4,7 @@ RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
+        libzip-dev \
         libpng-dev \
         libicu-dev \
         libxml2-dev \
@@ -12,7 +13,9 @@ RUN apt-get update && apt-get install -y \
         libxml2-utils \
         libxslt1.1 libxslt1-dev
 
-RUN docker-php-ext-install -j$(nproc) iconv mcrypt xsl \
+RUN pecl install mcrypt-1.0.2 && docker-php-ext-enable mcrypt
+
+RUN docker-php-ext-install -j$(nproc) iconv xsl \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd exif mysqli pdo_mysql zip intl xmlrpc soap
 
