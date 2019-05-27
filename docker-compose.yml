@@ -18,8 +18,6 @@ services:
     image: nginx:1.13
     volumes:
       - ${PWD}/nginx/:/etc/nginx/
-      - certs:/etc/letsencrypt/:ro
-      - certs-data:/data/letsencrypt/
       - cocos:/data/cocos/
       - pressbook:/data/pressbook/
       - moodle:/data/moodle/
@@ -70,10 +68,6 @@ volumes:
 
   # Database volume
   mariadb:
-
-  # Certificate data volumes
-  certs:
-  certs-data:
 
 networks:
   default:
